@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Votre portefeuille — Présentation complète</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a18;
+    --muted: #6b6866;
+    --border: #e4e2de;
+    --bg-soft: #f7f7f5;
+    --accent: #1f8a6e;
+    --accent-light: #e6f4f1;
+    --navy: #16614f;
+    --mid: #7bbfb0;
+    --c1: #16614f;
+    --c2: #1f8a6e;
+    --c3: #2aaa87;
+    --c4: #4bbfa0;
+    --c5: #80d4be;
+    --c6: #b0e8d8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #ffffff;
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 72px 40px 100px;
+  }
+
+  .section-label {
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(30px, 4vw, 44px);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 36px;
+    letter-spacing: -0.01em;
+  }
+
+  .section-title em { font-style: italic; color: var(--accent); }
+
+  .body-text {
+    font-size: 15.5px;
+    color: #3a3833;
+    line-height: 1.85;
+    margin-bottom: 24px;
+    max-width: 680px;
+  }
+
+  .divider { width: 40px; height: 1px; background: var(--border); margin: 60px 0; }
+
+  .quote-block {
+    border-left: 2px solid var(--accent);
+    padding: 22px 28px;
+    margin: 36px 0;
+    background: var(--accent-light);
+  }
+
+  .quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.65;
+  }
+
+  /* Page break between chapters when printed */
+  .page-sep {
+    height: 1px;
+    background: var(--border);
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  /* ============ SECTION 1 : LA CONSTRUCTION ============ */
+  .poche-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    margin: 44px 0;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .poche-card { background: #ffffff; padding: 36px 28px; }
+  .poche-card.highlight { background: var(--navy); }
+
+  .poche-percent {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .poche-card.highlight .poche-percent { color: var(--mid); }
+
+  .poche-name {
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .poche-card.highlight .poche-name {
+    color: rgba(255,255,255,0.4);
+    border-bottom-color: rgba(255,255,255,0.1);
+  }
+
+  .poche-desc { font-size: 13.5px; line-height: 1.75; color: #4a4844; }
+  .poche-card.highlight .poche-desc { color: rgba(255,255,255,0.75); }
+
+  .poche-tag {
+    display: inline-block;
+    margin-top: 18px;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    padding: 5px 11px;
+    background: var(--bg-soft);
+    color: var(--muted);
+    border-radius: 2px;
+  }
+
+  .poche-card.highlight .poche-tag {
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.6);
+  }
+
+  .total-bar {
+    display: flex;
+    height: 6px;
+    margin: 36px 0 16px;
+    overflow: hidden;
+    border-radius: 1px;
+  }
+
+  .bar-seg { height: 100%; transition: all 0.6s ease; }
+
+  .bar-labels { display: flex; font-size: 11.5px; color: var(--muted); gap: 0; }
+  .bar-label { text-align: center; font-weight: 400; }
+
+  .note-block {
+    background: var(--bg-soft);
+    border-left: 2px solid var(--border);
+    padding: 22px 28px;
+    margin-top: 36px;
+  }
+
+  .note-block p { font-size: 14px; color: var(--muted); line-height: 1.75; }
+
+  /* ============ SECTION 2 : GESTION SOUS MANDAT ============ */
+  .features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  .feature-item { background: #ffffff; padding: 30px 26px; }
+
+  .feature-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--border);
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+
+  .feature-title { font-weight: 500; font-size: 14px; color: var(--ink); margin-bottom: 10px; letter-spacing: 0.01em; }
+  .feature-desc { font-size: 13.5px; color: var(--muted); line-height: 1.7; }
+
+  .dark-band {
+    background: var(--navy);
+    margin: 60px -40px 0;
+    padding: 60px 40px 64px;
+  }
+
+  .dark-band .section-label { color: var(--mid); }
+  .dark-band .section-title { color: #ffffff; margin-bottom: 28px; }
+  .dark-band .body-text { color: rgba(255,255,255,0.72); }
+
+  .avantages { margin-top: 36px; display: flex; flex-direction: column; gap: 1px; }
+
+  .avantage-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background: rgba(255,255,255,0.05);
+    padding: 22px 24px;
+  }
+
+  .av-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--mid);
+    flex-shrink: 0;
+    line-height: 1.1;
+    width: 28px;
+    text-align: center;
+  }
+
+  .av-title { font-size: 14px; font-weight: 500; color: #ffffff; margin-bottom: 4px; }
+  .av-desc { font-size: 13.5px; color: rgba(255,255,255,0.65); line-height: 1.65; }
+
+  /* ============ SECTION 3 : LE GÉRANT ============ */
+  .big-numbers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 44px 0;
+  }
+
+  .big-num-item { background: #ffffff; padding: 36px 24px; text-align: center; }
+
+  .big-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  .big-num-label { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+
+  .history-band { background: var(--navy); padding: 52px 40px; margin: 0 -40px; }
+
+  .history-label {
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 12px;
+  }
+
+  .history-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 40px;
+    line-height: 1.2;
+  }
+
+  .history-items { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; }
+  .history-item { background: rgba(255,255,255,0.04); padding: 24px; }
+
+  .history-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--mid);
+    margin-bottom: 6px;
+    line-height: 1;
+  }
+
+  .history-text { font-size: 13.5px; color: rgba(255,255,255,0.65); line-height: 1.65; }
+
+  .team-section { margin-top: 60px; }
+
+  .team-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 28px;
+    line-height: 1.25;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 28px 0;
+  }
+
+  .team-card { background: var(--bg-soft); padding: 24px 20px; }
+  .team-name { font-weight: 500; font-size: 14px; color: var(--ink); margin-bottom: 4px; }
+  .team-role { font-size: 12px; color: var(--accent); margin-bottom: 10px; line-height: 1.4; }
+  .team-exp { font-size: 12px; color: var(--muted); }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 36px;
+  }
+
+  .stat-item { background: var(--accent-light); padding: 24px 20px; text-align: center; }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  /* ============ SECTION 4 : VOTRE PROFIL ============ */
+  .profils-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  .profil-card { background: var(--bg-soft); padding: 28px 22px; opacity: 0.5; }
+  .profil-card.active { background: var(--navy); opacity: 1; }
+
+  .profil-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--ink); margin-bottom: 10px; }
+  .profil-card.active .profil-name { color: #fff; }
+
+  .profil-range {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .profil-card.active .profil-range { color: var(--mid); border-bottom-color: rgba(255,255,255,0.1); }
+
+  .profil-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+  .profil-card.active .profil-desc { color: rgba(255,255,255,0.7); }
+
+  .profil-tag {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.6);
+    border-radius: 2px;
+  }
+
+  .risk-display {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    background: var(--accent-light);
+    padding: 32px;
+    margin: 40px 0;
+    border: 1px solid #b8ddd6;
+  }
+
+  .risk-scale { display: flex; gap: 5px; align-items: center; flex-shrink: 0; }
+
+  .risk-dot {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #dce6ed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .risk-dot.active { background: var(--navy); color: #fff; transform: scale(1.15); font-weight: 500; }
+
+  .risk-title { font-weight: 500; font-size: 15px; color: var(--ink); margin-bottom: 6px; }
+  .risk-desc { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+
+  .cursor-section { margin: 36px 0; background: var(--bg-soft); padding: 28px 32px; border: 1px solid var(--border); }
+
+  .cursor-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .cursor-track { position: relative; height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 10px; }
+
+  .cursor-fill { position: absolute; left: 50%; width: 33%; height: 100%; background: var(--navy); border-radius: 2px; }
+
+  .cursor-current {
+    position: absolute;
+    left: 73%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+
+  .cursor-endpoints { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-top: 8px; }
+  .cursor-middle { text-align: center; font-size: 12px; color: var(--accent); font-weight: 500; margin-top: 4px; }
+
+  .alloc-section { margin-top: 56px; }
+
+  .alloc-sub-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 28px;
+    line-height: 1.25;
+  }
+
+  .stacked-bar { display: flex; height: 10px; border-radius: 2px; overflow: hidden; margin: 20px 0 14px; gap: 2px; }
+  .sb { height: 100%; border-radius: 1px; transition: all 0.4s ease; }
+
+  .bar-legend { display: flex; flex-wrap: wrap; gap: 12px 24px; margin-bottom: 36px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); }
+  .legend-dot { width: 8px; height: 8px; border-radius: 1px; flex-shrink: 0; }
+  .legend-pct { font-weight: 500; color: var(--ink); }
+
+  .alloc-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+  .alloc-table tr { border-bottom: 1px solid var(--border); }
+  .alloc-table tr:last-child { border-bottom: none; }
+  .alloc-table td { padding: 14px 16px; font-size: 14px; vertical-align: middle; }
+  .alloc-table td:first-child { color: var(--ink); display: flex; align-items: center; gap: 12px; padding-left: 0; }
+
+  .alloc-table td:last-child {
+    text-align: right;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--navy);
+    white-space: nowrap;
+  }
+
+  .alloc-pip { width: 4px; height: 20px; border-radius: 2px; flex-shrink: 0; }
+  .alloc-sub { font-size: 12px; color: var(--muted); display: block; margin-top: 2px; }
+
+  .geo-section { margin-top: 48px; }
+  .geo-bars { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
+  .geo-row { display: flex; align-items: center; gap: 14px; }
+  .geo-label { font-size: 13px; color: var(--muted); width: 160px; flex-shrink: 0; }
+  .geo-bar-wrap { flex: 1; height: 5px; background: var(--border); }
+  .geo-bar-fill { height: 100%; background: var(--navy); }
+  .geo-pct { font-family: 'Cormorant Garamond', serif; font-size: 17px; color: var(--ink); width: 48px; text-align: right; flex-shrink: 0; }
+
+  /* ============ SECTION 5 : LA DIVERSIFICATION ============ */
+  .univers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 44px 0;
+  }
+
+  .univers-item { background: #fff; padding: 30px 22px; text-align: center; }
+
+  .univers-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .univers-label { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+
+  .sector-grid { display: flex; flex-direction: column; gap: 8px; margin: 28px 0; }
+  .sector-row { display: flex; align-items: center; gap: 14px; }
+  .sector-label { font-size: 13px; color: var(--muted); width: 220px; flex-shrink: 0; }
+  .sector-bar-wrap { flex: 1; height: 5px; background: var(--border); }
+  .sector-bar-fill { height: 100%; background: var(--navy); }
+  .sector-pct { font-family: 'Cormorant Garamond', serif; font-size: 17px; color: var(--ink); width: 52px; text-align: right; flex-shrink: 0; }
+
+  .asset-classes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  .ac-item { background: var(--bg-soft); padding: 26px 24px; }
+
+  .ac-title {
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--ink);
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ac-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+
+  .ac-tag {
+    font-size: 11.5px;
+    color: var(--muted);
+    background: #fff;
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: 2px;
+  }
+
+  .funds-section { margin: 44px 0; }
+
+  .funds-intro {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .funds-table { width: 100%; border-collapse: collapse; }
+  .funds-table thead tr { background: var(--navy); }
+
+  .funds-table thead td {
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    padding: 12px 16px;
+  }
+
+  .funds-table tbody tr { border-bottom: 1px solid var(--border); }
+  .funds-table tbody tr:nth-child(even) { background: var(--bg-soft); }
+  .funds-table tbody td { font-size: 13.5px; color: var(--ink); padding: 13px 16px; vertical-align: middle; }
+
+  .fund-type {
+    display: inline-block;
+    font-size: 10.5px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-weight: 500;
+    background: var(--accent-light);
+    color: var(--accent);
+  }
+
+  .fund-perf { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 400; }
+  .fund-perf.pos { color: var(--accent); }
+  .fund-perf.neg { color: #c0392b; }
+
+  .independence-block { background: var(--navy); padding: 40px; margin: 36px 0; }
+
+  .ind-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 16px;
+    line-height: 1.25;
+  }
+
+  .ind-text { font-size: 14.5px; color: rgba(255,255,255,0.7); line-height: 1.75; }
+  .ind-stat { display: flex; gap: 24px; margin-top: 28px; }
+  .ind-stat-item { text-align: center; flex: 1; background: rgba(255,255,255,0.06); padding: 20px 12px; }
+
+  .ind-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .ind-stat-label { font-size: 11.5px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+  @media (max-width: 600px) {
+    .page { padding: 48px 24px 80px; }
+    .poche-grid, .features, .profils-grid, .risk-display, .big-numbers,
+    .history-items, .team-grid, .stats-row, .asset-classes, .univers-grid { grid-template-columns: 1fr; }
+    .dark-band { margin: 60px -24px 0; padding: 48px 24px 52px; }
+    .history-band { margin: 0 -24px; padding: 40px 24px; }
+    .risk-display { flex-direction: column; gap: 20px; }
+    .geo-label, .sector-label { width: 120px; }
+    .ind-stat { flex-direction: column; gap: 1px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- SECTION 1 — LA CONSTRUCTION                                  -->
+<!-- ============================================================ -->
+<div class="page">
+
+  <div class="section-label">La construction</div>
+  <h1 class="section-title">Votre portefeuille en<br><em>trois poches</em></h1>
+
+  <p class="body-text">
+    Votre investissement de 1&nbsp;000&nbsp;000&nbsp;€ est réparti entre trois types de placements très différents. Chacun joue un rôle précis dans la construction d'ensemble. Ensemble, ils forment un portefeuille équilibré — capable de résister aux turbulences et de progresser sur la durée.
+  </p>
+
+  <div class="poche-grid">
+    <div class="poche-card">
+      <div class="poche-percent">40%</div>
+      <div class="poche-name">Fonds Euros Generali</div>
+      <p class="poche-desc">C'est la partie la plus sécurisée. Votre capital est garanti à tout moment par l'assureur. Les intérêts s'accumulent chaque année et ne peuvent jamais être perdus. C'est la fondation stable de votre portefeuille.</p>
+      <span class="poche-tag">Capital garanti · rendement annuel</span>
+    </div>
+
+    <div class="poche-card">
+      <div class="poche-percent">25%</div>
+      <div class="poche-name">Produits Structurés (FAS)</div>
+      <p class="poche-desc">Deux produits sur-mesure, dont un à capital 100% garanti à l'échéance. Ils permettent de viser des rendements supérieurs au fonds euros tout en encadrant précisément le niveau de risque accepté.</p>
+      <span class="poche-tag">Rendement ciblé · risque défini</span>
+    </div>
+
+    <div class="poche-card highlight">
+      <div class="poche-percent">35%</div>
+      <div class="poche-name">Gestion sous mandat (FID)</div>
+      <p class="poche-desc">La partie pilotée activement par Edmond de Rothschild Asset Management. C'est le moteur de performance de votre portefeuille sur le long terme, géré quotidiennement par une équipe d'experts.</p>
+      <span class="poche-tag">Profil Dynamique · gestion active</span>
+    </div>
+  </div>
+
+  <div class="total-bar">
+    <div class="bar-seg" style="width:40%; background: #a8d5cb;"></div>
+    <div class="bar-seg" style="width:25%; background: #7bbfb0;"></div>
+    <div class="bar-seg" style="width:35%; background: var(--navy);"></div>
+  </div>
+  <div class="bar-labels">
+    <div class="bar-label" style="width:40%;">40% Fonds euros</div>
+    <div class="bar-label" style="width:25%;">25% Structurés</div>
+    <div class="bar-label" style="width:35%; color: var(--navy); font-weight:500;">35% FID Edmond de Rothschild</div>
+  </div>
+
+  <div class="note-block">
+    <p>Cette répartition n'est pas le fruit du hasard. Elle combine <strong>sécurité</strong>, <strong>rendement encadré</strong> et <strong>performance à long terme</strong> — trois dimensions complémentaires qui permettent à votre patrimoine de progresser quelle que soit la météo des marchés. La poche FID en profil Dynamique est le moteur de croissance : conçue pour maximiser la performance sur un horizon supérieur à 5 ans.</p>
+  </div>
+
+</div>
+
+<div class="page-sep"></div>
+
+<!-- ============================================================ -->
+<!-- SECTION 2 — LA GESTION SOUS MANDAT                            -->
+<!-- ============================================================ -->
+<div class="page">
+
+  <div class="section-label">La gestion sous mandat</div>
+  <h1 class="section-title">Vous déléguez.<br>Des experts <em>pilotent.</em></h1>
+
+  <p class="body-text">
+    La gestion sous mandat, c'est simple&nbsp;: vous confiez une somme d'argent à une équipe de professionnels, et eux s'occupent de tout. Ils décident dans quoi investir, quand acheter, quand vendre — dans le respect d'un cadre défini ensemble (votre profil de risque).
+  </p>
+
+  <p class="body-text">
+    Ce n'est pas un fonds commun où tout le monde est logé à la même enseigne. C'est un <strong>Fonds Interne Dédié (FID)</strong>&nbsp;: un véhicule créé pour vous, géré pour vous, dans lequel les gérants d'Edmond de Rothschild Asset Management agissent avec la même exigence que s'il s'agissait de leur propre argent.
+  </p>
+
+  <div class="quote-block">
+    <div class="quote-text">Imaginez un pilote aux commandes de votre portefeuille — formé, expérimenté, qui surveille les marchés en permanence et ajuste le cap selon les conditions. Vous, vous voyagez. Lui, il pilote.</div>
+  </div>
+
+  <div class="features">
+    <div class="feature-item">
+      <div class="feature-num">01</div>
+      <div class="feature-title">Vous ne faites rien</div>
+      <p class="feature-desc">Pas besoin de suivre les marchés au quotidien. L'équipe de gestion s'en charge intégralement à votre place, 365 jours par an.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-num">02</div>
+      <div class="feature-title">Un cadre clair et défini</div>
+      <p class="feature-desc">Votre profil Dynamique est fixé à l'avance : entre 50% et 90% d'actions. Les gérants ne peuvent pas en sortir. Vous savez exactement dans quelle zone de risque vous êtes à tout moment.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-num">03</div>
+      <div class="feature-title">Totalement transparent</div>
+      <p class="feature-desc">Vous recevez des reportings réguliers détaillant les positions, les performances et les décisions prises. Rien ne se passe dans l'ombre.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-num">04</div>
+      <div class="feature-title">Toujours ajusté au marché</div>
+      <p class="feature-desc">Les gérants adaptent le portefeuille en temps réel aux évolutions économiques — crise, rebond, opportunité. Ils réagissent pour vous, avec méthode.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="dark-band">
+  <div style="max-width:820px; margin:0 auto; padding: 0 0;">
+    <div class="section-label">Pourquoi dans une assurance-vie luxembourgeoise</div>
+    <h2 class="section-title" style="font-family:'Cormorant Garamond',serif; font-size:clamp(26px,3.5vw,38px); font-weight:400; line-height:1.2; letter-spacing:-0.01em;">Une enveloppe qui<br><em style="color:var(--mid);">amplifie</em> la performance</h2>
+
+    <p class="body-text">
+      Loger une gestion sous mandat dans une assurance-vie luxembourgeoise, c'est combiner deux avantages puissants. L'un vient de la qualité de la gestion. L'autre vient de la structure juridique et fiscale qui l'héberge.
+    </p>
+
+    <div class="avantages">
+      <div class="avantage-row">
+        <div class="av-num">I</div>
+        <div class="av-content">
+          <div class="av-title">Capitalisation sans frottement fiscal</div>
+          <p class="av-desc">Les gains générés au sein du contrat ne sont pas taxés tant que vous ne retirez pas d'argent. Plus-values et dividendes se réinvestissent en totalité — l'effet cumulatif sur 10 ou 15 ans est considérable.</p>
+        </div>
+      </div>
+      <div class="avantage-row">
+        <div class="av-num">II</div>
+        <div class="av-content">
+          <div class="av-title">Fiscalité allégée après 8 ans</div>
+          <p class="av-desc">Après 8 ans de détention, les retraits bénéficient d'un abattement annuel et d'un taux d'imposition réduit. C'est l'une des enveloppes fiscales les plus efficaces disponibles en France.</p>
+        </div>
+      </div>
+      <div class="avantage-row">
+        <div class="av-num">III</div>
+        <div class="av-content">
+          <div class="av-title">Protection juridique maximale</div>
+          <p class="av-desc">Le Triangle de Sécurité luxembourgeois garantit que vos actifs sont séparés du bilan de l'assureur et protégés en priorité absolue — sans plafond, contrairement au fonds de garantie français limité à 70&nbsp;000&nbsp;€.</p>
+        </div>
+      </div>
+      <div class="avantage-row">
+        <div class="av-num">IV</div>
+        <div class="av-content">
+          <div class="av-title">Transmission facilitée</div>
+          <p class="av-desc">L'assurance-vie reste l'outil le plus efficace pour transmettre un patrimoine à vos proches, avec un régime fiscal très avantageux en dehors de la succession classique.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-sep"></div>
+
+<!-- ============================================================ -->
+<!-- SECTION 3 — LE GÉRANT (EDMOND DE ROTHSCHILD)                  -->
+<!-- ============================================================ -->
+<div class="page">
+
+  <div class="section-label">Le gérant</div>
+  <h1 class="section-title">Edmond de Rothschild&nbsp;: une maison<br>de conviction depuis <em>1953</em></h1>
+
+  <p class="body-text">
+    Edmond de Rothschild n'est pas une société de gestion ordinaire. C'est un groupe financier indépendant fondé sur la conviction profonde que la gestion d'actifs doit servir des projets à long terme. Créé à Paris en 1953 par le Baron Edmond de Rothschild, le groupe s'est bâti sur une culture d'entrepreneur — loin de la logique des grandes banques universelles.
+  </p>
+
+  <p class="body-text">
+    Aujourd'hui, Edmond de Rothschild Asset Management gère des mandats de gestion pour des clients privés et institutionnels en Europe, avec une approche fondée sur la conviction, la rigueur et l'indépendance. C'est cette double culture — gestion de conviction et architecture ouverte — qui distingue la maison.
+  </p>
+
+  <div class="big-numbers">
+    <div class="big-num-item">
+      <div class="big-num">175<span style="font-size:22px">Mds€</span></div>
+      <div class="big-num-label">d'actifs sous gestion au niveau du groupe Edmond de Rothschild</div>
+    </div>
+    <div class="big-num-item">
+      <div class="big-num">70<span style="font-size:22px">+</span></div>
+      <div class="big-num-label">années de présence au service des grandes fortunes et institutionnels</div>
+    </div>
+    <div class="big-num-item">
+      <div class="big-num">2016</div>
+      <div class="big-num-label">Début du track record du FID profil Dynamique — suivi continu depuis</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="history-band">
+  <div style="max-width:820px; margin:0 auto;">
+    <div class="history-label">L'expertise Architecture Ouverte — chiffres clés</div>
+    <div class="history-title">Une gestion de référence, éprouvée sur la durée</div>
+    <div class="history-items">
+      <div class="history-item">
+        <div class="history-year">Architecture ouverte</div>
+        <p class="history-text">Edmond de Rothschild AM sélectionne les meilleurs fonds du marché, qu'ils soient internes ou externes, sans biais en faveur des produits maison — pour un résultat optimisé.</p>
+      </div>
+      <div class="history-item">
+        <div class="history-year">Gestion active</div>
+        <p class="history-text">Le portefeuille est ajusté en permanence selon les conditions de marché. Les gérants agissent avec réactivité et discipline, en respectant les bornes de risque définies.</p>
+      </div>
+      <div class="history-item">
+        <div class="history-year">Titres vifs</div>
+        <p class="history-text">Une part significative du portefeuille est investie directement en actions d'entreprises sélectionnées individuellement — pour une conviction plus forte et un contrôle précis de l'exposition.</p>
+      </div>
+      <div class="history-item">
+        <div class="history-year">SRI 6 / 7</div>
+        <p class="history-text">Le profil Dynamique affiche un niveau de risque élevé, cohérent avec sa vocation : maximiser la performance sur un horizon supérieur à 5 ans, en exploitant pleinement le potentiel des marchés actions mondiaux.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page" style="padding-top:60px;">
+
+  <div class="team-section">
+    <div class="section-label">L'équipe qui gère votre argent</div>
+    <div class="team-sub">Des professionnels aguerris,<br>une expérience de longue date</div>
+
+    <p class="body-text">
+      Derrière votre mandat, il y a des hommes et des femmes dont c'est le métier depuis des décennies. L'équipe est volontairement resserrée — ce qui favorise la cohérence des décisions et la réactivité. Chaque mouvement dans votre portefeuille est le fruit d'une conviction collective, pas d'un algorithme.
+    </p>
+
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-name">Comité d'investissement</div>
+        <div class="team-role">Décision collective mensuelle</div>
+        <div class="team-exp">Allocation stratégique · révision tactique</div>
+      </div>
+      <div class="team-card">
+        <div class="team-name">Gérants de portefeuille</div>
+        <div class="team-role">Mise en œuvre quotidienne</div>
+        <div class="team-exp">Sélection des titres · gestion du risque</div>
+      </div>
+      <div class="team-card">
+        <div class="team-name">Analystes spécialisés</div>
+        <div class="team-role">Actions · Taux · Émergents · Alt.</div>
+        <div class="team-exp">Analyse fondamentale · quantitative</div>
+      </div>
+    </div>
+
+    <p class="body-text">
+      L'équipe est complétée par des analystes spécialisés sur les actions mondiales, les taux, les marchés émergents et les stratégies alternatives. Ce collectif agit de façon intégrée — la même analyse nourrit toutes les décisions d'allocation.
+    </p>
+
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-num">+81%</div>
+        <div class="stat-label">Performance cumulée brute du profil Dynamique depuis 2016</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">10,6%</div>
+        <div class="stat-label">Performance 2025 YTD brute du profil Dynamique</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">83%</div>
+        <div class="stat-label">Exposition actions actuelle — le cœur du profil Dynamique</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-sep"></div>
+
+<!-- ============================================================ -->
+<!-- SECTION 4 — VOTRE PROFIL : DYNAMIQUE                          -->
+<!-- ============================================================ -->
+<div class="page">
+
+  <div class="section-label">Votre profil</div>
+  <h1 class="section-title">Le profil <em>Dynamique</em>&nbsp;:<br>performance sur le long terme</h1>
+
+  <p class="body-text">
+    Edmond de Rothschild propose trois profils de gestion. Votre situation patrimoniale, votre horizon de placement et votre rapport au risque nous ont conduits à recommander le profil <strong>Dynamique</strong>. Il vise à maximiser la performance de votre capital sur le long terme, avec une exposition majoritaire aux marchés actions mondiaux.
+  </p>
+
+  <div class="profils-grid">
+    <div class="profil-card">
+      <div class="profil-name">Défensif</div>
+      <div class="profil-range">Obligations &amp; Monétaire : 70%–100%</div>
+      <p class="profil-desc">Priorité à la préservation du capital. Faible exposition aux actions, forte composante obligataire.</p>
+    </div>
+    <div class="profil-card">
+      <div class="profil-name">Équilibré</div>
+      <div class="profil-range">Actions : 30%–65%</div>
+      <p class="profil-desc">Recherche d'une croissance régulière avec un risque maîtrisé. L'équilibre entre rendement et protection.</p>
+    </div>
+    <div class="profil-card active">
+      <div class="profil-name">Dynamique</div>
+      <div class="profil-range">Actions : 50%–90%</div>
+      <p class="profil-desc">Priorité à la performance de long terme. Forte exposition aux actions mondiales, horizon minimum de 5 ans requis.</p>
+      <span class="profil-tag">Votre profil</span>
+    </div>
+  </div>
+
+  <div class="risk-display">
+    <div class="risk-scale">
+      <div class="risk-dot">1</div>
+      <div class="risk-dot">2</div>
+      <div class="risk-dot">3</div>
+      <div class="risk-dot">4</div>
+      <div class="risk-dot">5</div>
+      <div class="risk-dot active">6</div>
+      <div class="risk-dot">7</div>
+    </div>
+    <div class="risk-info">
+      <div class="risk-title">Niveau de risque&nbsp;: 6 sur 7</div>
+      <p class="risk-desc">Un risque élevé, conforme à l'objectif de forte valorisation du capital. Le portefeuille est construit pour capter pleinement la performance des marchés actions sur la durée. Horizon de placement recommandé&nbsp;: supérieur à 5 ans.</p>
+    </div>
+  </div>
+
+  <div class="cursor-section">
+    <div class="cursor-label">Flexibilité de la poche actions</div>
+    <div class="cursor-track">
+      <div class="cursor-fill"></div>
+      <div class="cursor-current"></div>
+    </div>
+    <div class="cursor-endpoints">
+      <span>0%</span>
+      <span>100%</span>
+    </div>
+    <div class="cursor-middle">Entre 50% et 90% selon les marchés — actuellement 83%</div>
+  </div>
+
+  <p class="body-text">
+    Cette flexibilité est essentielle. Elle permet aux gérants d'augmenter l'exposition aux actions quand les marchés offrent des opportunités, et de la réduire rapidement quand les risques s'accumulent — sans jamais sortir de votre cadre de risque défini.
+  </p>
+
+  <div class="alloc-section">
+    <div class="divider"></div>
+    <div class="section-label">La répartition actuelle du portefeuille</div>
+    <div class="alloc-sub-title">Comment votre argent<br>est investi aujourd'hui</div>
+
+    <p class="body-text">
+      Voici la répartition concrète du profil Dynamique au 31 décembre 2025. Elle reflète le positionnement actuel des gérants compte tenu de leur analyse économique et des conditions de marché.
+    </p>
+
+    <div class="stacked-bar">
+      <div class="sb" style="width:83%; background:var(--c1);"></div>
+      <div class="sb" style="width:11%; background:var(--c4);"></div>
+      <div class="sb" style="width:4.5%; background:var(--c5);"></div>
+      <div class="sb" style="width:1.5%; background:#d4a96a;"></div>
+    </div>
+
+    <div class="bar-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--c1);"></div> <span class="legend-pct">83%</span> Actions</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--c4);"></div> <span class="legend-pct">11%</span> Obligations</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--c5);"></div> <span class="legend-pct">4,5%</span> Liquidités</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#d4a96a;"></div> <span class="legend-pct">1,5%</span> Métaux industriels</div>
+    </div>
+
+    <table class="alloc-table">
+      <tbody>
+        <tr>
+          <td><div class="alloc-pip" style="background:var(--c1);"></div>
+            <div>
+              Actions (fonds, titres vifs, ETF)
+              <span class="alloc-sub">Exposition diversifiée — Europe 37%, Amérique du Nord 32%, Émergents 6%, Japon 1,5%, Thématiques 6,5%</span>
+            </div>
+          </td>
+          <td>83%</td>
+        </tr>
+        <tr>
+          <td><div class="alloc-pip" style="background:var(--c4);"></div>
+            <div>
+              Obligations
+              <span class="alloc-sub">Subordonnées 3,5%, High Yield 3%, Investment Grade 2,5%, Convertibles 2%</span>
+            </div>
+          </td>
+          <td>11%</td>
+        </tr>
+        <tr>
+          <td><div class="alloc-pip" style="background:var(--c5);"></div>
+            <div>
+              Liquidités
+              <span class="alloc-sub">Réserve de réactivité — déployée lors des opportunités</span>
+            </div>
+          </td>
+          <td>4,5%</td>
+        </tr>
+        <tr>
+          <td><div class="alloc-pip" style="background:#d4a96a;"></div>
+            <div>
+              Métaux industriels
+              <span class="alloc-sub">Décorrélation et protection contre l'inflation</span>
+            </div>
+          </td>
+          <td>1,5%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="geo-section">
+      <div class="section-label" style="margin-top:0;">Répartition géographique de la poche actions</div>
+
+      <div class="geo-bars">
+        <div class="geo-row">
+          <span class="geo-label">Europe</span>
+          <div class="geo-bar-wrap"><div class="geo-bar-fill" style="width:100%;"></div></div>
+          <span class="geo-pct">37,0%</span>
+        </div>
+        <div class="geo-row">
+          <span class="geo-label">Amérique du Nord</span>
+          <div class="geo-bar-wrap"><div class="geo-bar-fill" style="width:86%;"></div></div>
+          <span class="geo-pct">32,0%</span>
+        </div>
+        <div class="geo-row">
+          <span class="geo-label">Thématiques</span>
+          <div class="geo-bar-wrap"><div class="geo-bar-fill" style="width:18%;"></div></div>
+          <span class="geo-pct">6,5%</span>
+        </div>
+        <div class="geo-row">
+          <span class="geo-label">Pays émergents</span>
+          <div class="geo-bar-wrap"><div class="geo-bar-fill" style="width:16%;"></div></div>
+          <span class="geo-pct">6,0%</span>
+        </div>
+        <div class="geo-row">
+          <span class="geo-label">Japon</span>
+          <div class="geo-bar-wrap"><div class="geo-bar-fill" style="width:4%;"></div></div>
+          <span class="geo-pct">1,5%</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="page-sep"></div>
+
+<!-- ============================================================ -->
+<!-- SECTION 5 — LA DIVERSIFICATION                                -->
+<!-- ============================================================ -->
+<div class="page">
+
+  <div class="section-label">La diversification</div>
+  <h1 class="section-title">Pas tous les œufs<br>dans le même <em>panier</em></h1>
+
+  <p class="body-text">
+    Même avec un profil à dominante actions — 83% du portefeuille — la diversification reste le principe cardinal de la gestion Edmond de Rothschild. Investir dans plusieurs secteurs, plusieurs zones géographiques et plusieurs styles de gestion permet de capter la performance globale des marchés tout en réduisant les risques de concentration.
+  </p>
+
+  <div class="univers-grid">
+    <div class="univers-item">
+      <div class="univers-num">11</div>
+      <div class="univers-label">Secteurs d'activité représentés dans la poche actions du profil Dynamique</div>
+    </div>
+    <div class="univers-item">
+      <div class="univers-num">5</div>
+      <div class="univers-label">Zones géographiques investies — Europe, Amérique du Nord, Émergents, Japon, Thématiques</div>
+    </div>
+    <div class="univers-item">
+      <div class="univers-num">83%</div>
+      <div class="univers-label">D'exposition actions — le cœur du profil Dynamique, moteur de performance long terme</div>
+    </div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">Si les marchés américains baissent, l'exposition européenne peut compenser. Si un secteur est sous pression, d'autres secteurs progressent. La diversification ne réduit pas la performance — elle la rend plus régulière.</div>
+  </div>
+
+  <div class="section-label">Répartition sectorielle de la poche actions (titres vifs)</div>
+  <div class="sector-grid">
+    <div class="sector-row">
+      <span class="sector-label">Industrie</span>
+      <div class="sector-bar-wrap"><div class="sector-bar-fill" style="width:100%;"></div></div>
+      <span class="sector-pct">12,5%</span>
+    </div>
+    <div class="sector-row">
+      <span class="sector-label">Consommation discrétionnaire</span>
+      <div class="sector-bar-wrap"><div class="sector-bar-fill" style="width:80%;"></div></div>
+      <span class="sector-pct">10,0%</span>
+    </div>
+    <div class="sector-row">
+      <span class="sector-label">Finance</span>
+      <div class="sector-bar-wrap"><div class="sector-bar-fill" style="width:72%;"></div></div>
+      <span class="sector-pct">9,0%</span>
+    </div>
+    <div class="sector-row">
+      <span class="sector-label">Consommation de base</span>
+      <div class="sector-bar-wrap"><div class="sector-bar-fill" style="width:48%;"></div></div>
+      <span class="sector-pct">6,0%</span>
+    </div>
+    <div class="sector-row">
+      <span class="sector-label">Soins de santé</span>
+      <div class="sector-bar-wrap"><div class="sector-bar-fill" style="width:44%;"></div></div>
+      <span class="sector-pct">5,5%</span>
+    </div>
+    <div class="sector-row">
+      <span class="sector-label">Services aux collectivités</span>
+      <div class="sector-bar-wrap"><div class="sector-bar-fill" style="width:36%;"></div></div>
+      <span class="sector-pct">4,5%</span>
+    </div>
+    <div class="sector-row">
+      <span class="sector-label">Technologies de l'information</span>
+      <div class="sector-bar-wrap"><div class="sector-bar-fill" style="width:32%;"></div></div>
+      <span class="sector-pct">4,0%</span>
+    </div>
+    <div class="sector-row">
+      <span class="sector-label">Services de communication</span>
+      <div class="sector-bar-wrap"><div class="sector-bar-fill" style="width:24%;"></div></div>
+      <span class="sector-pct">3,0%</span>
+    </div>
+    <div class="sector-row">
+      <span class="sector-label">Immobilier</span>
+      <div class="sector-bar-wrap"><div class="sector-bar-fill" style="width:12%;"></div></div>
+      <span class="sector-pct">1,5%</span>
+    </div>
+    <div class="sector-row">
+      <span class="sector-label">Énergie</span>
+      <div class="sector-bar-wrap"><div class="sector-bar-fill" style="width:12%;"></div></div>
+      <span class="sector-pct">1,5%</span>
+    </div>
+    <div class="sector-row">
+      <span class="sector-label">Matériaux</span>
+      <div class="sector-bar-wrap"><div class="sector-bar-fill" style="width:12%;"></div></div>
+      <span class="sector-pct">1,5%</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="section-label">Les classes d'actifs couvertes</div>
+
+  <div class="asset-classes">
+    <div class="ac-item">
+      <div class="ac-title">Actions (83%)</div>
+      <div class="ac-tags">
+        <span class="ac-tag">Europe 37%</span>
+        <span class="ac-tag">Amérique du Nord 32%</span>
+        <span class="ac-tag">Thématiques 6,5%</span>
+        <span class="ac-tag">Émergents 6%</span>
+        <span class="ac-tag">Japon 1,5%</span>
+        <span class="ac-tag">Titres vifs directs</span>
+        <span class="ac-tag">Fonds sélectionnés</span>
+        <span class="ac-tag">ETF</span>
+      </div>
+    </div>
+    <div class="ac-item">
+      <div class="ac-title">Obligations (11%)</div>
+      <div class="ac-tags">
+        <span class="ac-tag">Subordonnées 3,5%</span>
+        <span class="ac-tag">High Yield 3%</span>
+        <span class="ac-tag">Investment Grade 2,5%</span>
+        <span class="ac-tag">Convertibles 2%</span>
+      </div>
+    </div>
+    <div class="ac-item">
+      <div class="ac-title">Liquidités (4,5%)</div>
+      <div class="ac-tags">
+        <span class="ac-tag">Monétaire</span>
+        <span class="ac-tag">Réserve tactique</span>
+      </div>
+    </div>
+    <div class="ac-item">
+      <div class="ac-title">Métaux industriels (1,5%)</div>
+      <div class="ac-tags">
+        <span class="ac-tag">Décorrélation</span>
+        <span class="ac-tag">Couverture inflation</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="funds-section">
+    <div class="funds-intro">Exemples de titres et fonds en portefeuille (profil Dynamique — décembre 2025)</div>
+    <table class="funds-table">
+      <thead>
+        <tr>
+          <td>Titre / Fonds</td>
+          <td>Type</td>
+          <td>Perf. 1 mois</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ofi Invest Energy Strategic Metals</td>
+          <td><span class="fund-type">Métaux industriels</span></td>
+          <td><span class="fund-perf pos">+13,8%</span></td>
+        </tr>
+        <tr>
+          <td>Deckers Outdoor Corporation</td>
+          <td><span class="fund-type">Action directe</span></td>
+          <td><span class="fund-perf pos">+12,7%</span></td>
+        </tr>
+        <tr>
+          <td>BNP Paribas S.A.</td>
+          <td><span class="fund-type">Action directe</span></td>
+          <td><span class="fund-perf pos">+10,0%</span></td>
+        </tr>
+        <tr>
+          <td>Echiquier Space</td>
+          <td><span class="fund-type">Fonds thématique</span></td>
+          <td><span class="fund-perf pos">+8,1%</span></td>
+        </tr>
+        <tr>
+          <td>Stellantis N.V.</td>
+          <td><span class="fund-type">Nouvelle position</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>PayPal Holdings, Inc.</td>
+          <td><span class="fund-type">Action directe</span></td>
+          <td><span class="fund-perf neg">-6,7%</span></td>
+        </tr>
+        <tr>
+          <td>NextEra Energy, Inc.</td>
+          <td><span class="fund-type">Action directe</span></td>
+          <td><span class="fund-perf neg">-5,2%</span></td>
+        </tr>
+        <tr>
+          <td>Vonovia SE</td>
+          <td><span class="fund-type">Action directe</span></td>
+          <td><span class="fund-perf neg">-4,7%</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="independence-block">
+    <div class="ind-title">Une gestion active et disciplinée,<br>pas un simple suivi d'indice</div>
+    <p class="ind-text">
+      Le profil Dynamique n'est pas un ETF actions mondiales. Les gérants font des choix — sectoriels, géographiques, de titres — en fonction de leur analyse des marchés. Cette conviction active est ce qui a permis de surperformer l'indice de référence 6 fois sur 7 années de suivi.
+    </p>
+    <div class="ind-stat">
+      <div class="ind-stat-item">
+        <div class="ind-stat-num">+81%</div>
+        <div class="ind-stat-label">Performance cumulée portefeuille depuis 2016</div>
+      </div>
+      <div class="ind-stat-item">
+        <div class="ind-stat-num">+57%</div>
+        <div class="ind-stat-label">Performance cumulée indice de référence</div>
+      </div>
+      <div class="ind-stat-item">
+        <div class="ind-stat-num">+24pp</div>
+        <div class="ind-stat-label">Surperformance cumulée vs indice</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
